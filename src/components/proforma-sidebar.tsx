@@ -68,7 +68,7 @@ export function ProformaSidebar() {
           <span>Total</span>
           <span>{formatCurrency(total())}</span>
         </div>
-        <Button className="w-full">Generar proforma</Button>
+        <Button className="w-full">Esta seria su inversión</Button>
       </div>
     </aside>
   );

@@ -14,7 +14,7 @@ export function CatalogClient({ categories }: { categories: CategoryDTO[] }) {
   return (
     <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 p-6 lg:grid-cols-[1fr_320px]">
       <div>
-        <h1 className="mb-4 text-2xl font-bold">Nuestro catálogo</h1>
+        <h1 className="mb-4 text-2xl font-bold text-pink-700">Nuestros Productos</h1>
 
         {/* Tabs de categoría */}
         <div className="mb-6 flex gap-2 overflow-x-auto">
