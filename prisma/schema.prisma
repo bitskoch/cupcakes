@@ -1,0 +1,42 @@
+// Prisma schema — Proforma App
+// Usamos Supabase (PostgreSQL) como base de datos.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")   // conexión pooled (runtime)
+  directUrl = env("DIRECT_URL")     // conexión directa (migraciones)
+}
+
+model Category {
+  id        String    @id @default(cuid())
+  name      String    @unique
+  slug      String    @unique
+  order     Int       @default(0) // para controlar el orden de despliegue
+  products  Product[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@map("categories")
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  price       Decimal  @db.Decimal(10, 2)
+  imageUrl    String?  @map("image_url")
+  isActive    Boolean  @default(true) @map("is_active")
+
+  category    Category @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  categoryId  String   @map("category_id")
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([categoryId])
+  @@map("products")
+}

@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: proforma-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: proforma
+      POSTGRES_PASSWORD: proforma
+      POSTGRES_DB: proforma
+    ports:
+      - "5432:5432"
+    volumes:
+      - proforma_pgdata:/var/lib/postgresql/data
+
+volumes:
+  proforma_pgdata:
