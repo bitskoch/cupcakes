@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { LogoutButton } from "@/components/logout-button";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -8,7 +9,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <Link href="/admin" className="font-semibold">
             Panel administrador
           </Link>
-          <nav className="flex gap-4 text-sm">
+          <nav className="flex items-center gap-4 text-sm">
             <Link href="/admin/categorias" className="text-muted-foreground hover:text-foreground">
               Categorías
             </Link>
@@ -18,6 +19,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <Link href="/" className="text-muted-foreground hover:text-foreground">
               Ver catálogo →
             </Link>
+            <LogoutButton />
           </nav>
         </div>
       </header>

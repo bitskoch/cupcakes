@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Pencil, Trash2, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select } from "@/components/ui/select";
+import { ImageUpload } from "@/components/image-upload";
 import { formatCurrency } from "@/lib/utils";
 import { productSchema, type ProductInput } from "@/types";
 
@@ -36,6 +37,7 @@ export default function ProductosPage() {
     register,
     handleSubmit,
     reset,
+    control,
     formState: { errors, isSubmitting },
   } = useForm<ProductInput>({
     resolver: zodResolver(productSchema),
@@ -187,11 +189,14 @@ export default function ProductosPage() {
         </div>
 
         <div className="mb-4 space-y-1">
-          <Label htmlFor="imageUrl">URL de imagen</Label>
-          <Input id="imageUrl" placeholder="https://..." {...register("imageUrl")} />
-          <p className="text-xs text-muted-foreground">
-            Por ahora pega una URL pública. El upload de imágenes se conecta más adelante.
-          </p>
+          <Label>Imagen del producto</Label>
+          <Controller
+            name="imageUrl"
+            control={control}
+            render={({ field }) => (
+              <ImageUpload value={field.value ?? ""} onChange={field.onChange} />
+            )}
+          />
           {errors.imageUrl && <p className="text-xs text-destructive">{errors.imageUrl.message}</p>}
         </div>
 

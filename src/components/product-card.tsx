@@ -49,7 +49,7 @@ export function ProductCard({ product }: { product: ProductDTO }) {
               addItem({ productId: product.id, name: product.name, price: product.price })
             }
           >
-            <Plus className="mr-1 h-3 w-3 sm:h-4 sm:w-4" />
+            <Plus className="mr-1 h-3 w-3  sm:h-4 sm:w-4" />
             Agregar
           </Button>
         </div>
